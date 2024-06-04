@@ -15,8 +15,8 @@ impl EntityProvider for MyEntityProvider {
         request: Request<EntityType>,
     ) -> Result<Response<Entity>, Status> {
         Ok(Response::new(Entity {
-            data: "Hello".to_string(),
-            r#type: "Hello".to_string(),
+            data: "Sample data".to_string(),
+            r#type: request.into_inner().r#type,
             index: 0,
         }))
     }
