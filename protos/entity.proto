@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package entity.actions;
+package entity;
 
 // Service providing entity-related operations
 service EntityProvider {
