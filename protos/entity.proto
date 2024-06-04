@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package entity.actions;
+
+// Service providing entity-related operations
+service EntityProvider {
+  // RPC method to generate an entity based on a given type
+  rpc GenerateEntity(EntityType) returns (Entity);
+}
+
+// Message defining the type of entity to generate
+message EntityType {
+  string type = 1;  // The type identifier for the entity
+}
+
+// Detailed message representing an entity
+message Entity {
+  string type = 1;  // Type of the entity, corresponding to EntityType
+  string data = 2;  // Additional data about the entity
+  int32 index = 3;  // An index or identifier for the entity
+}
