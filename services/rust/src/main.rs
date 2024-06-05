@@ -4,8 +4,10 @@ pub mod entity {
 
 use entity::entity_provider_server::{EntityProvider, EntityProviderServer};
 use entity::{Entity, EntityType};
+use tonic::transport::Server;
 use tonic::{Request, Response, Status};
 
+#[derive(Debug, Default)]
 struct MyEntityProvider;
 
 #[tonic::async_trait]
@@ -22,4 +24,16 @@ impl EntityProvider for MyEntityProvider {
     }
 }
 
-fn main() {}
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let addr = "[::1]:50051".parse()?;
+    let entity_provider = MyEntityProvider::default();
+
+    println!("EntityProviderServer listening on {}", addr);
+    Server::builder()
+        .add_service(EntityProviderServer::new(entity_provider))
+        .serve(addr)
+        .await?;
+
+    Ok(())
+}
