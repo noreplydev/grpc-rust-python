@@ -1,0 +1,1 @@
+services/python/venv/bin/python3 -m grpc_tools.protoc -Iprotos/ --python_out=./services/python --grpc_python_out=./services/python entity.proto
